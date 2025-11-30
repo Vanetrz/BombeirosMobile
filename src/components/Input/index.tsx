@@ -29,10 +29,10 @@ const Input = forwardRef<TextInput, Props>(({ label, formProps, inputProps }, re
 
                     <View style={[styles.group,
                         isMultiline && {
-                                height: undefined,   // remove altura fixa
-                                minHeight: 120,      // altura da caixa
+                                height: undefined,
+                                minHeight: 120,
                                 alignItems: "flex-start",
-                            }
+                            },
                     ]}>
                         {/* Ícone (se quiser usar de novo) */}
                         {/* 

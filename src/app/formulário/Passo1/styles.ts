@@ -2,19 +2,21 @@ import { StyleSheet } from "react-native"
 
 export const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#FFFFFF",
         justifyContent: "center",
         alignItems: "center",
 
         padding: 21,
         gap: 32,
     },
+
     title: {
         fontSize: 24,
         fontWeight: "700",
     },
+
     form: {
         width: "100%",
+        backgroundColor: "#FFFFFF",
         borderRadius: 8,
         borderColor: "#D7DEDD",
         borderWidth: 1,
@@ -22,10 +24,15 @@ export const styles = StyleSheet.create({
         padding: 22,
         gap: 12,
     },
+
     dataHora: {
         flexDirection: "row",
         width: "100%",
         justifyContent: "space-between",
         gap: 12,
     },
+
+    inputPequeno: {
+        flex: 1,
+    }
 })
