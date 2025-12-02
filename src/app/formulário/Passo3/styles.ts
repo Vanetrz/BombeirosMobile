@@ -9,14 +9,21 @@ export const styles = StyleSheet.create({
         gap: 26,
     },
 
+    progress: {
+        alignSelf: "center",
+        fontSize: 16,
+        fontWeight: "500",
+        marginTop: -20,
+    },
+
     title: {
         fontSize: 24,
         fontWeight: "700",
     },
 
     form: {
-        backgroundColor: "#FFFFFF",
         width: "100%",
+        backgroundColor: "#FFFFFF",
         borderRadius: 8,
         borderColor: "#D7DEDD",
         borderWidth: 1,

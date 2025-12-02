@@ -92,6 +92,7 @@ export function Passo2() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Localização</Text>
+            <Text style={styles.progress}>2/4</Text>
 
             <View style={styles.form}>
                 

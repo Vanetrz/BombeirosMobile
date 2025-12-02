@@ -3,10 +3,17 @@ import { StyleSheet } from "react-native";
 export const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
+        padding: 21,
 
-        justifyContent: "center",
-        alignItems: "center",
+        // justifyContent: "center",
+        // alignItems: "center",
+    },
+
+    progress: {
+        alignSelf: "center",
+        fontSize: 16,
+        fontWeight: "500",
+        marginTop: -20,
     },
 
     title: {

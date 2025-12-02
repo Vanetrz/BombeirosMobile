@@ -26,6 +26,7 @@ export function Passo3() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Anexos</Text>
+            <Text style={styles.progress}>3/4</Text>
 
             <View style={styles.form}>
 

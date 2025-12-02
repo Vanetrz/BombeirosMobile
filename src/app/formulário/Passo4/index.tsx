@@ -22,8 +22,9 @@ const { formData, updateFormData } = useFormOcorrencias();
     }
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
+        <ScrollView style={styles.container}>
             <Text style={styles.title}>Confirmação de dados</Text>
+            <Text style={styles.progress}>4/4</Text>
 
             {/* Seção de informações básicas*/}
             <View style={styles.form}>

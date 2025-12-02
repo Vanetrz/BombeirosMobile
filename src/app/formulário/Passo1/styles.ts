@@ -9,6 +9,13 @@ export const styles = StyleSheet.create({
         gap: 26,
     },
 
+    progress: {
+        alignSelf: "center",
+        fontSize: 16,
+        fontWeight: "500",
+        marginTop: -20,
+    },
+
     title: {
         fontSize: 24,
         fontWeight: "700",

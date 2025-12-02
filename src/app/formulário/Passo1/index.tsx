@@ -32,6 +32,7 @@ export function Passo1() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Informações básicas</Text>
+            <Text style={styles.progress}>1/4</Text>
 
             <View style={styles.form}>
                 <Dropdown
