@@ -9,6 +9,8 @@ export const styles = StyleSheet.create({
 
         justifyContent: 'center',
         alignItems: 'center',
+
+        marginBottom: 200,
     },
     title: {
         fontSize: 16,

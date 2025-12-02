@@ -1,17 +1,18 @@
-import { StyleSheet } from "react-native"
+import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
+        flex: 1,
+        padding: 20,
+
         justifyContent: "center",
         alignItems: "center",
-
-        padding: 21,
-        gap: 26,
     },
 
     title: {
         fontSize: 24,
         fontWeight: "700",
+        marginBottom: 20,
     },
 
     form: {
@@ -23,10 +24,22 @@ export const styles = StyleSheet.create({
 
         padding: 22,
         gap: 12,
+        marginBottom: 26,
     },
 
-    erro: {
-        color: "#FF1F36",
+    sectionTitle: {
+        fontSize: 18,
+        fontWeight: "700",
+        marginBottom: 10,
+    },
+
+    item: {
         fontSize: 14,
-    }
-})
+        marginBottom: 6,
+    },
+
+    label: {
+        fontWeight: "500",
+        marginBottom: 4,
+    },
+});

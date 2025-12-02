@@ -2,25 +2,30 @@ import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { View, Text } from "react-native";
 import { useLocalizacao } from "../../../hooks/useLocalizacao";
+import { useFormOcorrencias } from "../../../hooks/useFormOcorrencias";
+import { FormProps } from "../../context/ContextoFormulario";
 import * as Location from "expo-location";
 
 import { styles } from "./styles";
 
 import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import type { RootParamList } from "../../../routes/formulario.routes";
+// import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+// import type { RootParamList } from "../../../routes/formulario.routes";
 
 import { Input } from "../../../components/Input";
 import { Enviar } from "../../../components/Button/Enviar"
 
-export default function Passo2() {
+export function Passo2() {
     const { carregando, endereco, coordenadas } = useLocalizacao();
-    const { control, handleSubmit, setValue, watch } = useForm();
+    const { control, handleSubmit, setValue, watch } = useForm<FormProps>();
     const [erroEndereco, setErroEndereco] = useState("");
     const [erroCoords, setErroCoords] = useState("");
-    const navigation = useNavigation<NativeStackNavigationProp<RootParamList>>();
 
-    function handleNextStep(data: any) {
+    const { updateFormData } = useFormOcorrencias()
+    const navigation = useNavigation();
+
+    function handleNextStep(data: FormProps) {
+        updateFormData(data)
         navigation.navigate("passo3");
     }
 
@@ -37,9 +42,6 @@ export default function Passo2() {
         }
     }, [endereco, coordenadas]);
 
-    // ----------------------------------------
-    // 1) Quando o usuário confirmar o endereço
-    // ----------------------------------------
     async function confirmarEndereco() {
         if (!end) return;
         setErroEndereco("");
@@ -55,9 +57,6 @@ export default function Passo2() {
         }
     }
 
-    // ----------------------------------------
-    // 2) Quando confirmar latitude e longitude
-    // ----------------------------------------
     async function confirmarCoordenadas() {
         if (!lat || !lon) return;
 
@@ -92,7 +91,7 @@ export default function Passo2() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Localização da Ocorrência</Text>
+            <Text style={styles.title}>Localização</Text>
 
             <View style={styles.form}>
                 
@@ -103,7 +102,7 @@ export default function Passo2() {
                     inputProps={{
                         editable: true,
                         placeholder: "Digite o endereço",
-                        onSubmitEditing: confirmarEndereco, // <- Ao confirmar o campo
+                        onSubmitEditing: confirmarEndereco,
                     }}
                 />
                 {erroEndereco ? <Text style={styles.erro}>{erroEndereco}</Text> : null}
@@ -114,7 +113,7 @@ export default function Passo2() {
                     formProps={{ control, name: "latitude" }}
                     inputProps={{
                         editable: true,
-                        onSubmitEditing: confirmarCoordenadas, // <- Atualiza endereço
+                        onSubmitEditing: confirmarCoordenadas,
                     }}
                 />
 
@@ -124,7 +123,7 @@ export default function Passo2() {
                     formProps={{ control, name: "longitude" }}
                     inputProps={{
                         editable: true,
-                        onSubmitEditing: confirmarCoordenadas, // <- Atualiza endereço
+                        onSubmitEditing: confirmarCoordenadas,
                     }}
                 />
 

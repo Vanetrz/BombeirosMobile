@@ -2,18 +2,20 @@ import { StyleSheet } from "react-native"
 
 export const styles = StyleSheet.create({
     container: {
-        backgroundColor: "#FFFFFF",
         justifyContent: "center",
         alignItems: "center",
 
         padding: 21,
-        gap: 32,
+        gap: 26,
     },
+
     title: {
         fontSize: 24,
         fontWeight: "700",
     },
+
     form: {
+        backgroundColor: "#FFFFFF",
         width: "100%",
         borderRadius: 8,
         borderColor: "#D7DEDD",

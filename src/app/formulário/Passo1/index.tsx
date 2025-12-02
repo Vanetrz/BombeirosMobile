@@ -1,21 +1,25 @@
 import { View, Text, TextInput } from "react-native"
 import { styles } from "./styles"
 import { useForm, Controller } from "react-hook-form"
+import { useFormOcorrencias } from "../../../hooks/useFormOcorrencias"
 import { useRef } from "react"
 
 import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import type { RootParamList } from "../../../routes/formulario.routes";
+// import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+// import type { RootParamList } from "../../../routes/formulario.routes";
 
 import { Input } from "../../../components/Input"
 import { Enviar } from "../../../components/Button/Enviar"
 import { Dropdown } from "../../../components/Dropdown"
+import { FormProps } from "../../context/ContextoFormulario";
 
-export default function Passo1() {
-    const navigation = useNavigation<NativeStackNavigationProp<RootParamList>>();
-    const { control, handleSubmit } = useForm();
+export function Passo1() {
+    const { updateFormData } = useFormOcorrencias()
+    const navigation = useNavigation();
+    const { control, handleSubmit } = useForm<FormProps>();
 
-    function handleNextStep(data: any) {
+    function handleNextStep(data: FormProps) {
+        updateFormData(data)
         navigation.navigate("passo2");
     }
 
@@ -27,9 +31,7 @@ export default function Passo1() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>
-                    Nova ocorrência
-            </Text>
+            <Text style={styles.title}>Informações básicas</Text>
 
             <View style={styles.form}>
                 <Dropdown

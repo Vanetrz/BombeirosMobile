@@ -1,7 +1,10 @@
-import { IndexRoutes } from './src/routes';
+import { IndexRoutes } from './src/routes/formulario-routes';
+import { FormProvider } from './src/app/context/ContextoFormulario';
 
 export default function App() {
     return (
-        <IndexRoutes/>
+        <FormProvider>
+            <IndexRoutes/>
+        </FormProvider>
     )
 }

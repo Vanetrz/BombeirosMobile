@@ -3,21 +3,29 @@ import { styles } from "./styles"
 import { useForm } from "react-hook-form"
 import { useRef } from "react"
 
+import { useFormOcorrencias } from "../../../hooks/useFormOcorrencias"
+import { FormProps } from "../../context/ContextoFormulario";
+
 import { Input } from "../../../components/Input"
 import { Enviar } from "../../../components/Button/Enviar"
 
-export default function Passo3() {
-    const {control, handleSubmit} = useForm();
+import { useNavigation } from "expo-router"
+// import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+// import type { RootParamList } from "../../../routes/formulario.routes";
 
-    function handleNextStep(data: any) {
-        console.log(data);
+export function Passo3() {
+    const navigation = useNavigation();
+    const { updateFormData } = useFormOcorrencias()
+    const {control, handleSubmit} = useForm<FormProps>();
+
+    function handleNextStep(data: FormProps) {
+        updateFormData(data)
+        navigation.navigate("passo4");
     }
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>
-                    Anexos
-            </Text>
+            <Text style={styles.title}>Anexos</Text>
 
             <View style={styles.form}>
 

@@ -4,6 +4,7 @@ export declare global {
             passo1: undefined;
             passo2: undefined;
             passo3: undefined;
+            passo4: undefined;
         }
     }
 }
