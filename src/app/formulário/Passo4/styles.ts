@@ -4,26 +4,30 @@ export const styles = StyleSheet.create({
     container: {
         flex: 1,
         padding: 21,
+        gap: 26,
 
-        // justifyContent: "center",
-        // alignItems: "center",
+        justifyContent: "flex-start",
+        alignItems: "center",
     },
 
     progress: {
         alignSelf: "center",
         fontSize: 16,
-        fontWeight: "500",
         marginTop: -20,
+        fontWeight: "500",
     },
 
     title: {
         fontSize: 24,
         fontWeight: "700",
-        marginBottom: 20,
+    },
+
+    formGeral: {
+        width: "100%",
+        gap: 26,
     },
 
     form: {
-        width: "100%",
         backgroundColor: "#FFFFFF",
         borderRadius: 8,
         borderColor: "#D7DEDD",
@@ -31,7 +35,6 @@ export const styles = StyleSheet.create({
 
         padding: 22,
         gap: 12,
-        marginBottom: 26,
     },
 
     sectionTitle: {

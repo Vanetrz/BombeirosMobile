@@ -24,10 +24,11 @@ export function Passo1() {
     }
 
     const dataAtual = new Date().toLocaleDateString();
-    const horaAtual = new Date().toLocaleTimeString().slice(0, 5);
+    const horaAtual = new Date().toLocaleTimeString().slice(0, 4);
     
     const equipeRef = useRef<TextInput>(null);
     const viaturaRef = useRef<TextInput>(null);
+    const descricaoRef = useRef<TextInput>(null);
 
     return (
         <View style={styles.container}>
@@ -35,6 +36,8 @@ export function Passo1() {
             <Text style={styles.progress}>1/4</Text>
 
             <View style={styles.form}>
+
+
                 <Dropdown
                     label="Categoria"
                     formProps={{
@@ -127,7 +130,9 @@ export function Passo1() {
                             textAlignVertical: "top",
                             fontSize: 14,
                         },
+                        returnKeyType: "next"
                     }}
+                    ref={descricaoRef}
                 />
             </View>
 
