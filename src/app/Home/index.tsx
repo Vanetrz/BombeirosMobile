@@ -21,10 +21,9 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
     navigation.navigate('Formulario');
   };
   
-  // const handleMyOccurrences = (): void => {
-  //   // NAVEGAÇÃO FUNCIONAL para a tela 'MyOccurrences'
-  //   navigation.navigate('MyOccurrences');
-  // };
+  const handleMyOccurrences = (): void => {
+    navigation.navigate('Ocorrencias');
+  };
   
   // Cor azul marinho escuro dos cards
   const cardColor = '#192a56'; 
@@ -45,10 +44,10 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
           <Text style={styles.cardText}>Nova ocorrência</Text>
         </TouchableOpacity>
         
-        Card: Minhas Ocorrências
+        {/* Card: Minhas Ocorrências */}
         <TouchableOpacity 
           style={[styles.card, { backgroundColor: cardColor }]}
-          // onPress={handleMyOccurrences} // CHAMADA DE NAVEGAÇÃO
+          onPress={handleMyOccurrences} // CHAMADA DE NAVEGAÇÃO
         >
           <Feather name="file-text" size={30} color="#fff" />
           <Text style={styles.cardText}>Minhas ocorrências</Text>

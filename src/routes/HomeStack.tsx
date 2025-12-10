@@ -5,8 +5,7 @@ import { RootStackParamList } from '../@types/navigation';
 // Importa as telas
 import FormularioRoutes from "../../src/routes/formulario-routes";
 import HomeScreen from '../app/Home';
-// import NewOccurrenceScreen from '../screens/NewOccurrenceScreen';
-// import MyOccurrencesScreen from '../screens/MyOccurrencesScreen';
+import Ocorrencias from '../app/Ocorrencias/Ocorrencias';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -30,19 +29,11 @@ const HomeStack: React.FC = () => (
             options={{ headerShown: false }}
         />
 
-        
-        
-        {/* As telas de destino que serão navegadas a partir do Dashboard (Home) */}
-        {/* <Stack.Screen
-        name="NewOccurrence"
-        component={NewOccurrenceScreen}
-        options={{ title: 'Nova Ocorrência' }}
-        />
         <Stack.Screen
-        name="MyOccurrences"
-        component={MyOccurrencesScreen}
-        options={{ title: 'Minhas Ocorrências' }}
-        /> */}
+            name="Ocorrencias"
+            component={Ocorrencias}
+            options={{ title: "Minhas Ocorrências" }}
+        />
         
     </Stack.Navigator>
 );

@@ -18,6 +18,7 @@ export type RootStackParamList = {
     Home: { profile: UserProfile } | undefined;
     ForgotPassword: undefined;
     Formulario: undefined;
+    Ocorrencias: undefined;
 
     passo1?: undefined;
     passo2?: undefined;
