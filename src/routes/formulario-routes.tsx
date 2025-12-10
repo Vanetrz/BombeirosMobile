@@ -1,10 +1,7 @@
-import { NavigationContainer } from "@react-navigation/native"
-import { FormularioRoutes } from "./formulario.routes"
+import FormularioRoutes from "./formulario.routes";
 
-export function IndexRoutes() {
+export default function IndexRoutes() {
     return (
-        <NavigationContainer>
-            <FormularioRoutes />
-        </NavigationContainer>
+        <FormularioRoutes />
     );
 }
