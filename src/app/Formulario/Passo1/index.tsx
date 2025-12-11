@@ -41,6 +41,18 @@ export function Passo1() {
 
                 <View style={styles.form}>
 
+                    <Input
+                        label="Título"
+                        formProps={{
+                            control,
+                            name: "titulo",
+                        }}
+                        inputProps={{
+                            placeholder: "Título da ocorrência",
+                            onSubmitEditing: () => viaturaRef.current?.focus(),
+                            returnKeyType: "next"
+                        }}
+                    />
 
                     <Dropdown
                         label="Categoria"
@@ -60,6 +72,21 @@ export function Passo1() {
                             { label: "Produtos perigosos", value: "produtos_perigosos" },
                             { label: "Desabamento", value: "desabamento" },
                             { label: "Ação preventiva", value: "acao_preventiva" },
+                        ]}
+                    />
+
+                    <Dropdown
+                        label="Status"
+                        formProps={{
+                            control,
+                            name: "status",
+                        }}
+                        options={[
+                            { label: "selecione o status", value: "" },
+                            { label: "Em andamento", value: "andamento" },
+                            { label: "Aberto", value: "aberto" },
+                            { label: "Finalizado", value: "finalizado" },
+                            { label: "Cancelado", value: "cancelado" },
                         ]}
                     />
 

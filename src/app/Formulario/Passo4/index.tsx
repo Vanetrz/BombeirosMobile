@@ -35,6 +35,12 @@ const { formData, updateFormData } = useFormOcorrencias();
                     <View style={styles.form}>
                         <Text style={styles.sectionTitle}>Informações Básicas</Text>
 
+                        <Input
+                            label="Título"
+                            formProps={{ control, name: "titulo" }}
+                            inputProps={{ editable: true }}
+                        />
+
                         <Dropdown
                             label="Categoria"
                             formProps={{ control, name: "categoria" }}
@@ -51,6 +57,21 @@ const { formData, updateFormData } = useFormOcorrencias();
                                 { label: "Ação preventiva", value: "acao_preventiva" },
                             ]}
                         />
+
+                        <Dropdown
+                        label="Status"
+                        formProps={{
+                            control,
+                            name: "status",
+                        }}
+                        options={[
+                            { label: "selecione o status", value: "" },
+                            { label: "Em andamento", value: "andamento" },
+                            { label: "Aberto", value: "aberto" },
+                            { label: "Finalizado", value: "finalizado" },
+                            { label: "Cancelado", value: "cancelado" },
+                        ]}
+                    />
 
                         <Input
                             label="Data"
