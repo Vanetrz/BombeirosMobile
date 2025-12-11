@@ -5,6 +5,7 @@ import { HomeScreenProps, UserProfile } from '../../@types/navigation';
 // Usamos Feather para os ícones
 import { Feather } from '@expo/vector-icons';
 
+import Header from "../../components/Header";
 import { styles } from "./styles";
 
 const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
@@ -30,6 +31,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
   
   return (
     <View style={styles.container}>
+    <Header title="Ínicio" />
       
       <View style={styles.content}>
         <Text style={styles.welcomeText}>Bem-vindo, {profile}.</Text>

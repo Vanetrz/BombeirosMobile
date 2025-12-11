@@ -1,12 +1,13 @@
-import { View, Text, ScrollView } from "react-native";
-import { styles } from "./styles";
-import { useFormOcorrencias } from "../../../hooks/useFormOcorrencias";
-
-import { FormProps } from "../../context/ContextoFormulario";
 import { useForm } from "react-hook-form";
-import { Dropdown } from "../../../components/Dropdown";
-import { Input } from "../../../components/Input";
+import { ScrollView, Text, View } from "react-native";
+import { useFormOcorrencias } from "../../../hooks/useFormOcorrencias";
+import { FormProps } from "../../context/ContextoFormulario";
+import { styles } from "./styles";
+
 import { Enviar } from "../../../components/Button/Enviar";
+import { Dropdown } from "../../../components/Dropdown";
+import Header from "../../../components/Header";
+import { Input } from "../../../components/Input";
 
 export function Passo4() {
 const { formData, updateFormData } = useFormOcorrencias();
@@ -22,108 +23,112 @@ const { formData, updateFormData } = useFormOcorrencias();
     }
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
-            <Text style={styles.title}>Confirmação de dados</Text>
-            <Text style={styles.progress}>4/4</Text>
+        <View style={styles.container}>
+            <Header title="Minhas ocorrências" />  
 
-            <View style={styles.formGeral}>
-                {/* Seção de informações básicas*/}
-                <View style={styles.form}>
-                    <Text style={styles.sectionTitle}>Informações Básicas</Text>
+            <ScrollView contentContainerStyle={styles.scroll}>
+                <Text style={styles.title}>Confirmação de dados</Text>
+                <Text style={styles.progress}>4/4</Text>
 
-                    <Dropdown
-                        label="Categoria"
-                        formProps={{ control, name: "categoria" }}
-                        options={[
-                            { label: "Incêndio urbano", value: "incendio_urbano" },
-                            { label: "Incêndio florestal", value: "incendio_florestal" },
-                            { label: "Acidente de trânsito", value: "acidente_transito" },
-                            { label: "Atendimento pré-hospitalar (APH)", value: "aph" },
-                            { label: "Resgate veicular", value: "resgate_veicular" },
-                            { label: "Resgate em altura", value: "resgate_altura" },
-                            { label: "Salvamento aquático", value: "salvamento_aquatico" },
-                            { label: "Produtos perigosos", value: "produtos_peligrosos" },
-                            { label: "Desabamento", value: "desabamento" },
-                            { label: "Ação preventiva", value: "acao_preventiva" },
-                        ]}
-                    />
+                <View style={styles.formGeral}>
+                    {/* Seção de informações básicas*/}
+                    <View style={styles.form}>
+                        <Text style={styles.sectionTitle}>Informações Básicas</Text>
 
-                    <Input
-                        label="Data"
-                        formProps={{ control, name: "data" }}
-                        inputProps={{ editable: true }}
-                    />
+                        <Dropdown
+                            label="Categoria"
+                            formProps={{ control, name: "categoria" }}
+                            options={[
+                                { label: "Incêndio urbano", value: "incendio_urbano" },
+                                { label: "Incêndio florestal", value: "incendio_florestal" },
+                                { label: "Acidente de trânsito", value: "acidente_transito" },
+                                { label: "Atendimento pré-hospitalar (APH)", value: "aph" },
+                                { label: "Resgate veicular", value: "resgate_veicular" },
+                                { label: "Resgate em altura", value: "resgate_altura" },
+                                { label: "Salvamento aquático", value: "salvamento_aquatico" },
+                                { label: "Produtos perigosos", value: "produtos_peligrosos" },
+                                { label: "Desabamento", value: "desabamento" },
+                                { label: "Ação preventiva", value: "acao_preventiva" },
+                            ]}
+                        />
 
-                    <Input
-                        label="Hora"
-                        formProps={{ control, name: "hora" }}
-                        inputProps={{ editable: true }}
-                    />
+                        <Input
+                            label="Data"
+                            formProps={{ control, name: "data" }}
+                            inputProps={{ editable: true }}
+                        />
 
-                    <Input
-                        label="Equipe"
-                        formProps={{ control, name: "equipe" }}
-                        inputProps={{ editable: true }}
-                    />
+                        <Input
+                            label="Hora"
+                            formProps={{ control, name: "hora" }}
+                            inputProps={{ editable: true }}
+                        />
 
-                    <Input
-                        label="Viatura"
-                        formProps={{ control, name: "viatura" }}
-                        inputProps={{ editable: true }}
-                    />
+                        <Input
+                            label="Equipe"
+                            formProps={{ control, name: "equipe" }}
+                            inputProps={{ editable: true }}
+                        />
 
-                    <Input
-                        label="Descrição"
-                        formProps={{ control, name: "descricao" }}
-                        inputProps={{
-                            editable: true,
-                            multiline: true,
-                            numberOfLines: 4,
-                            style: {
-                                height: 100,
-                                textAlignVertical: "top",
-                            }
-                        }}
-                    />
-                </View>
+                        <Input
+                            label="Viatura"
+                            formProps={{ control, name: "viatura" }}
+                            inputProps={{ editable: true }}
+                        />
 
-                {/* Seção de localização */}
-                <View style={styles.form}>
-                    <Text style={styles.sectionTitle}>Localização</Text>
+                        <Input
+                            label="Descrição"
+                            formProps={{ control, name: "descricao" }}
+                            inputProps={{
+                                editable: true,
+                                multiline: true,
+                                numberOfLines: 4,
+                                style: {
+                                    height: 100,
+                                    textAlignVertical: "top",
+                                }
+                            }}
+                        />
+                    </View>
 
-                    <Input
-                        label="Endereço"
-                        formProps={{ control, name: "endereco" }}
-                        inputProps={{ editable: true }}
-                    />
+                    {/* Seção de localização */}
+                    <View style={styles.form}>
+                        <Text style={styles.sectionTitle}>Localização</Text>
 
-                    <Input
-                        label="Latitude"
-                        formProps={{ control, name: "latitude" }}
-                        inputProps={{ editable: true }}
-                    />
+                        <Input
+                            label="Endereço"
+                            formProps={{ control, name: "endereco" }}
+                            inputProps={{ editable: true }}
+                        />
 
-                    <Input
-                        label="Longitude"
-                        formProps={{ control, name: "longitude" }}
-                        inputProps={{ editable: true }}
-                    />
+                        <Input
+                            label="Latitude"
+                            formProps={{ control, name: "latitude" }}
+                            inputProps={{ editable: true }}
+                        />
+
+                        <Input
+                            label="Longitude"
+                            formProps={{ control, name: "longitude" }}
+                            inputProps={{ editable: true }}
+                        />
+                    </View>
+                    
+                    {/* Seção de anexos */}
+                    <View style={styles.form}>
+                        <Text style={styles.sectionTitle}>Anexos</Text>
+                        <Input
+                            label="Exemplo"
+                            formProps={{ control, name: "exemplo" }}
+                            inputProps={{ editable: true }}
+                        />
+                    </View>
                 </View>
                 
-                {/* Seção de anexos */}
-                <View style={styles.form}>
-                    <Text style={styles.sectionTitle}>Anexos</Text>
-                    <Input
-                        label="Exemplo"
-                        formProps={{ control, name: "exemplo" }}
-                        inputProps={{ editable: true }}
-                    />
-                </View>
-            </View>
-            
 
-            {/* dps adicionar "onPress={finalizar}"" */}
-            <Enviar title="Finalizar"/>
-        </ScrollView>
+                {/* dps adicionar "onPress={finalizar}"" */}
+                <Enviar title="Finalizar"/>
+            </ScrollView>
+        </View>
     );
 }

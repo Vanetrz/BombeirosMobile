@@ -4,6 +4,11 @@ export const styles = StyleSheet.create({
     container: {
         justifyContent: "flex-start",
         alignItems: "center",
+    },
+
+    scroll: {
+        justifyContent: "flex-start",
+        alignItems: "center",
 
         padding: 21,
         gap: 26,
@@ -17,7 +22,7 @@ export const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 24,
+        fontSize: 18,
         fontWeight: "700",
     },
 

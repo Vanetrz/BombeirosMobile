@@ -1,13 +1,13 @@
-import { View, Text, TextInput } from "react-native"
-import { styles } from "./styles"
 import { useForm } from "react-hook-form"
-import { useRef } from "react"
+import { ScrollView, Text, View } from "react-native"
+import { styles } from "./styles"
 
 import { useFormOcorrencias } from "../../../hooks/useFormOcorrencias"
-import { FormProps } from "../../context/ContextoFormulario";
+import { FormProps } from "../../context/ContextoFormulario"
 
-import { Input } from "../../../components/Input"
 import { Enviar } from "../../../components/Button/Enviar"
+import Header from "../../../components/Header"
+import { Input } from "../../../components/Input"
 
 import { useNavigation } from "expo-router"
 // import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -25,26 +25,31 @@ export function Passo3() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Anexos</Text>
-            <Text style={styles.progress}>3/4</Text>
+            <Header title="Nova ocorrência" />
 
-            <View style={styles.form}>
+            <ScrollView contentContainerStyle={styles.scroll}>
+                <Text style={styles.title}>Anexos</Text>
+                <Text style={styles.progress}>3/4</Text>
 
-                <Input 
-                    // icon="chevron-down"
-                    label="Exemplo"
-                    formProps={{
-                        control,
-                        name: "exemplo",
-                    }}
-                    inputProps={{
-                        placeholder: "Exemplo",
-                    }}
-                />
-            </View>
-            
+                <View style={styles.form}>
+
+                    <Input 
+                        // icon="chevron-down"
+                        label="Exemplo"
+                        formProps={{
+                            control,
+                            name: "exemplo",
+                        }}
+                        inputProps={{
+                            placeholder: "Exemplo",
+                        }}
+                    />
+                </View>
                 
-            <Enviar title="Próximo" onPress={handleSubmit(handleNextStep)} />
+                    
+                <Enviar title="Próximo" onPress={handleSubmit(handleNextStep)} />
+            </ScrollView>
+
         </View>
     );
 }

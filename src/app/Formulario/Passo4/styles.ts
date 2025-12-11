@@ -2,11 +2,17 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
-        padding: 21,
-        gap: 26,
-
         justifyContent: "flex-start",
         alignItems: "center",
+    },
+
+    scroll: {
+        justifyContent: "flex-start",
+        alignItems: "center",
+        width: "100%",
+
+        padding: 21,
+        gap: 26,
     },
 
     progress: {
@@ -17,7 +23,7 @@ export const styles = StyleSheet.create({
     },
 
     title: {
-        fontSize: 24,
+        fontSize: 18,
         fontWeight: "700",
     },
 
@@ -32,6 +38,7 @@ export const styles = StyleSheet.create({
         borderColor: "#D7DEDD",
         borderWidth: 1,
 
+        width: 350,
         padding: 22,
         gap: 12,
     },

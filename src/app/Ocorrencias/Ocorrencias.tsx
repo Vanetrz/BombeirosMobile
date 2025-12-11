@@ -26,24 +26,24 @@ export default function OccurrencesScreen({ navigation }: any) {
         <View style={{ flex: 1 }}>
         <Header title="Minhas ocorrências" />
 
-        <View style={{ padding: 16 }}>
-            <Button
-            title="Filtrar por mapa"
-            variant="ghost"
-            onPress={() => navigation.navigate("FilterMap")}
-            style={{ marginBottom: 12 }}
-            />
-
-            <ScrollView>
-            {MOCK.map((item) => (
-                <OccurrenceCard
-                key={item.id}
-                item={item}
-                onEdit={() => navigation.navigate("Formulario")} 
+            <View style={{ padding: 16 }}>
+                <Button
+                title="Filtrar por mapa"
+                variant="ghost"
+                onPress={() => navigation.navigate("FilterMap")}
+                style={{ marginBottom: 12 }}
                 />
-            ))}
-            </ScrollView>
-        </View>
+
+                <ScrollView>
+                {MOCK.map((item) => (
+                    <OccurrenceCard
+                    key={item.id}
+                    item={item}
+                    onEdit={() => navigation.navigate("Formulario")} 
+                    />
+                ))}
+                </ScrollView>
+            </View>
         </View>
     );
 }

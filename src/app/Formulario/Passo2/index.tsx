@@ -1,10 +1,10 @@
+import * as Location from "expo-location";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { View, Text } from "react-native";
-import { useLocalizacao } from "../../../hooks/useLocalizacao";
+import { ScrollView, Text, View } from "react-native";
 import { useFormOcorrencias } from "../../../hooks/useFormOcorrencias";
+import { useLocalizacao } from "../../../hooks/useLocalizacao";
 import { FormProps } from "../../context/ContextoFormulario";
-import * as Location from "expo-location";
 
 import { styles } from "./styles";
 
@@ -12,8 +12,9 @@ import { useNavigation } from "@react-navigation/native";
 // import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 // import type { RootParamList } from "../../../routes/formulario.routes";
 
+import { Enviar } from "../../../components/Button/Enviar";
+import Header from "../../../components/Header";
 import { Input } from "../../../components/Input";
-import { Enviar } from "../../../components/Button/Enviar"
 
 export function Passo2() {
     const { carregando, endereco, coordenadas } = useLocalizacao();
@@ -91,47 +92,51 @@ export function Passo2() {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>Localização</Text>
-            <Text style={styles.progress}>2/4</Text>
+            <Header title="Nova ocorrência" />
 
-            <View style={styles.form}>
-                
-                {/* Endereço */}
-                <Input
-                    label="Endereço"
-                    formProps={{ control, name: "endereco" }}
-                    inputProps={{
-                        editable: true,
-                        placeholder: "Digite o endereço",
-                        onSubmitEditing: confirmarEndereco,
-                    }}
-                />
-                {erroEndereco ? <Text style={styles.erro}>{erroEndereco}</Text> : null}
+            <ScrollView contentContainerStyle={styles.scroll}>
+                <Text style={styles.title}>Localização</Text>
+                <Text style={styles.progress}>2/4</Text>
 
-                {/* Latitude */}
-                <Input
-                    label="Latitude"
-                    formProps={{ control, name: "latitude" }}
-                    inputProps={{
-                        editable: true,
-                        onSubmitEditing: confirmarCoordenadas,
-                    }}
-                />
+                <View style={styles.form}>
+                    
+                    {/* Endereço */}
+                    <Input
+                        label="Endereço"
+                        formProps={{ control, name: "endereco" }}
+                        inputProps={{
+                            editable: true,
+                            placeholder: "Digite o endereço",
+                            onSubmitEditing: confirmarEndereco,
+                        }}
+                    />
+                    {erroEndereco ? <Text style={styles.erro}>{erroEndereco}</Text> : null}
 
-                {/* Longitude */}
-                <Input
-                    label="Longitude"
-                    formProps={{ control, name: "longitude" }}
-                    inputProps={{
-                        editable: true,
-                        onSubmitEditing: confirmarCoordenadas,
-                    }}
-                />
+                    {/* Latitude */}
+                    <Input
+                        label="Latitude"
+                        formProps={{ control, name: "latitude" }}
+                        inputProps={{
+                            editable: true,
+                            onSubmitEditing: confirmarCoordenadas,
+                        }}
+                    />
 
-                {erroCoords ? <Text style={styles.erro}>{erroCoords}</Text> : null}
-            </View>
+                    {/* Longitude */}
+                    <Input
+                        label="Longitude"
+                        formProps={{ control, name: "longitude" }}
+                        inputProps={{
+                            editable: true,
+                            onSubmitEditing: confirmarCoordenadas,
+                        }}
+                    />
 
-            <Enviar title="Próximo" onPress={handleSubmit(handleNextStep)} />
+                    {erroCoords ? <Text style={styles.erro}>{erroCoords}</Text> : null}
+                </View>
+
+                <Enviar title="Próximo" onPress={handleSubmit(handleNextStep)} />
+            </ScrollView>
         </View>
     );
 }
