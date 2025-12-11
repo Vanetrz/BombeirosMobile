@@ -1,5 +1,4 @@
-import { createContext, useState, ReactNode } from 'react'
-import { set } from 'react-hook-form';
+import { createContext, ReactNode, useState } from 'react';
 
 export type FormProps = {
     categoria?: string;
@@ -11,12 +10,13 @@ export type FormProps = {
     endereco?: string;
     latitude?: string;
     longitude?: string;
-    exemplo?: string;
+    assinatura?: string;
+    fotos?: string[];
 }
 
 type ContextoformDataProps = {
     formData: FormProps;
-    updateFormData: (value: FormProps) => void;
+    updateFormData: (value: Partial<FormProps>) => void;
 }
 
 type FromProviderProps = {
@@ -40,4 +40,5 @@ function FormProvider({ children }: FromProviderProps) {
     )
 }
 
-export { FormContext, FormProvider }
+export { FormContext, FormProvider };
+

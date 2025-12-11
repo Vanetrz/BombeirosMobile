@@ -1,3 +1,4 @@
+import React, { useState } from "react"
 import { useForm } from "react-hook-form"
 import { ScrollView, Text, View } from "react-native"
 import { styles } from "./styles"
@@ -8,6 +9,7 @@ import { FormProps } from "../../context/ContextoFormulario"
 import { Enviar } from "../../../components/Button/Enviar"
 import Header from "../../../components/Header"
 import { Input } from "../../../components/Input"
+import MediaPicker from "../../../components/MediaPicker"
 
 import { useNavigation } from "expo-router"
 // import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
@@ -15,11 +17,12 @@ import { useNavigation } from "expo-router"
 
 export function Passo3() {
     const navigation = useNavigation();
-    const { updateFormData } = useFormOcorrencias()
+    const { updateFormData, formData } = useFormOcorrencias()
+    const [fotos, setFotos] = useState<string[]>(formData?.fotos || []);
     const {control, handleSubmit} = useForm<FormProps>();
 
     function handleNextStep(data: FormProps) {
-        updateFormData(data)
+        updateFormData(data);
         navigation.navigate("passo4");
     }
 
@@ -32,21 +35,21 @@ export function Passo3() {
                 <Text style={styles.progress}>3/4</Text>
 
                 <View style={styles.form}>
+                    <MediaPicker value={fotos} onChange={setFotos} />
 
                     <Input 
                         // icon="chevron-down"
-                        label="Exemplo"
+                        label="Assinatura"
                         formProps={{
                             control,
-                            name: "exemplo",
+                            name: "assinatura",
                         }}
                         inputProps={{
-                            placeholder: "Exemplo",
+                            placeholder: "Assinatura do responsável",
                         }}
                     />
                 </View>
                 
-                    
                 <Enviar title="Próximo" onPress={handleSubmit(handleNextStep)} />
             </ScrollView>
 

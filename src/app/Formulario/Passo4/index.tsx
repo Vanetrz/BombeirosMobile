@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { ScrollView, Text, View } from "react-native";
+import { Image, ScrollView, Text, View } from "react-native";
 import { useFormOcorrencias } from "../../../hooks/useFormOcorrencias";
 import { FormProps } from "../../context/ContextoFormulario";
 import { styles } from "./styles";
@@ -118,10 +118,30 @@ const { formData, updateFormData } = useFormOcorrencias();
                     <View style={styles.form}>
                         <Text style={styles.sectionTitle}>Anexos</Text>
                         <Input
-                            label="Exemplo"
-                            formProps={{ control, name: "exemplo" }}
+                            label="Assinatura"
+                            formProps={{ control, name: "assinatura" }}
                             inputProps={{ editable: true }}
                         />
+
+                        {formData.fotos?.length ? (
+                        <View style={{ flexDirection: "row", marginTop: 8 }}>
+                            {formData.fotos.slice(0, 3).map((uri) => (
+                            <Image
+                                key={uri}
+                                source={{ uri }}
+                                style={{
+                                width: 64,
+                                height: 64,
+                                marginRight: 8,
+                                borderRadius: 8,
+                                }}
+                            />
+                            ))}
+                        </View>
+                        ) :
+                        <Text style={{ marginTop: 8, fontStyle: "italic", color: "#666" }}>
+                            Nenhuma mídia adicionada
+                        </Text>}
                     </View>
                 </View>
                 
