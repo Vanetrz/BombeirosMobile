@@ -1,89 +1,101 @@
 import React, { useState } from 'react';
-import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { LoginScreenProps, UserProfile } from '../../@types/navigation';
-
+import { ActivityIndicator, Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { LoginScreenProps } from '../../@types/navigation';
+import { loginRequest } from '../../services/auth';
 import { styles } from './styles';
 
 const LoginScreen: React.FC<LoginScreenProps> = ({ navigation }) => {
-  // Variáveis de estado tipadas
-    const [username, setUsername] = useState<string>('');
-    const [password, setPassword] = useState<string>('');
-    const [loginAttempts, setLoginAttempts] = useState<number>(0); 
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
-    const handleLogin = (): void => {
-        if (loginAttempts >= 3) {
-        Alert.alert("Bloqueado", "Muitas tentativas falhas. Tente novamente mais tarde.");
-        return;
-        }
+  const handleLogin = async (): Promise<void> => {
+    if (!email || !password) {
+      Alert.alert("Atenção", "Preencha email e senha");
+      return;
+    }
 
-        let userProfile: UserProfile | null = null;
+    setLoading(true);
+    try {
+      const response = await loginRequest(email, password);
+      
+      // Mapear role para perfil
+      let userProfile: string = 'Operador';
+      switch (response.user.role) {
+        case 'ADMIN': userProfile = 'Administrador'; break;
+        case 'CHEFE': userProfile = 'Chefe'; break;
+        case 'OPERADOR': userProfile = 'Operador'; break;
+      }
+
+      Alert.alert("Sucesso", `Login realizado! Perfil: ${userProfile}`);
+      
+      // Navegar para Home com dados do usuário
+      navigation.replace('Home', { 
+        profile: userProfile,
+        userData: response.user
+      });
+      
+    } catch (error: any) {
+      Alert.alert("Erro", error.message || "Credenciais inválidas");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.logoContainer}>
+        <View style={styles.siren} />
+        <View style={styles.siren} />
+        <View style={styles.siren} />
+      </View>
+
+      <Text style={styles.mainHeader}>F</Text>
+
+      <View style={styles.loginSection}>
+        <Text style={styles.promptTitle}>Entrar em sua conta</Text>
+        <Text style={styles.promptSubtitle}>Insira e-mail e senha cadastrados</Text>
+
+        <TextInput
+          style={styles.input}
+          placeholder="Email" 
+          onChangeText={setEmail} 
+          value={email}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          editable={!loading}
+        />
         
-        // Lógica de autenticação
-        if (username === "admin" && password === "123") {
-        userProfile = 'Administrador';
-        } else if (username === "chefe" && password === "123") {
-        userProfile = 'Chefe';
-        } else if (username === "operador" && password === "123") {
-        userProfile = 'Operador';
-        }
+        <TextInput
+          style={styles.input}
+          placeholder="Senha"
+          onChangeText={setPassword}
+          value={password}
+          secureTextEntry 
+          editable={!loading}
+        />
 
-        if (userProfile) {
-        Alert.alert("Sucesso", `Login realizado! Perfil: ${userProfile}`);
-        setLoginAttempts(0); 
-        // Navegação tipada, enviando o parâmetro 'profile'
-        navigation.replace('Home', { profile: userProfile }); 
-        } else {
-        setLoginAttempts(prev => prev + 1); 
-        const remaining: number = 3 - (loginAttempts + 1);
-        Alert.alert("Erro de Login", `Credenciais inválidas. Tentativas restantes: ${remaining}`);
-        }
-    };
-
-    return (
-        <View style={styles.container}>
-        
-        <View style={styles.logoContainer}>
-            <View style={styles.siren} />
-            <View style={styles.siren} />
-            <View style={styles.siren} />
-        </View>
-
-        <Text style={styles.mainHeader}>Gestor de ocorrências</Text>
-        <Text style={styles.subHeader}>Bombeiros - PE</Text>
-
-        <View style={styles.loginSection}>
-            <Text style={styles.promptTitle}>Entrar em sua conta</Text>
-            <Text style={styles.promptSubtitle}>Insira e-mail e senha cadastrados</Text>
-
-            <TextInput
-            style={styles.input}
-            placeholder="Email" 
-            onChangeText={setUsername} 
-            value={username}
-            keyboardType="email-address"
-            autoCapitalize="none"
-            />
-            
-            <TextInput
-            style={styles.input}
-            placeholder="Senha"
-            onChangeText={setPassword}
-            value={password}
-            secureTextEntry 
-            />
-
-            <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <TouchableOpacity 
+          style={[styles.button, loading && styles.buttonDisabled]} 
+          onPress={handleLogin}
+          disabled={loading}
+        >
+          {loading ? (
+            <ActivityIndicator color="#fff" />
+          ) : (
             <Text style={styles.buttonText}>Continuar</Text>
-            </TouchableOpacity>
+          )}
+        </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('ForgotPassword')}>
-            <Text style={styles.linkText}>Esqueci a senha</Text>
-            </TouchableOpacity>
-        </View>
-        </View>
-    );
+        <TouchableOpacity 
+          onPress={() => navigation.navigate('ForgotPassword')}
+          disabled={loading}
+        >
+          <Text style={styles.linkText}>Esqueci a senha</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 };
-
-
 
 export default LoginScreen;

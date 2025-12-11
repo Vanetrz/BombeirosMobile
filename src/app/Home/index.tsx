@@ -31,7 +31,7 @@ const HomeScreen: React.FC<HomeScreenProps> = ({ navigation, route }) => {
   
   return (
     <View style={styles.container}>
-    <Header title="Ínicio" />
+    <Header title="Ínicio" showBack={false} />
       
       <View style={styles.content}>
         <Text style={styles.welcomeText}>Bem-vindo, {profile}.</Text>

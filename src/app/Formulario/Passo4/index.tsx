@@ -1,24 +1,102 @@
 import { useNavigation } from "expo-router";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Image, ScrollView, Text, View } from "react-native";
-import { useFormOcorrencias } from "../../../hooks/useFormOcorrencias";
-import { FormProps } from "../../context/ContextoFormulario";
-import { styles } from "./styles";
-
+import { ActivityIndicator, Alert, Image, ScrollView, Text, View } from "react-native";
 import { Enviar } from "../../../components/Button/Enviar";
 import { Voltar } from "../../../components/Button/Voltar";
 import { Dropdown } from "../../../components/Dropdown";
 import Header from "../../../components/Header";
 import { Input } from "../../../components/Input";
+import { useFormOcorrencias } from "../../../hooks/useFormOcorrencias";
+import { adicionarGeo, criarOcorrencia } from "../../../services/auth";
+import { FormProps } from "../../context/ContextoFormulario";
+import { styles } from "./styles";
 
 export function Passo4() {
     const navigation = useNavigation();
     const { formData, updateFormData } = useFormOcorrencias();
+    const [loading, setLoading] = useState(false);
 
-    // Preenche o formulário com os dados já existentes
+    // Mapear status do frontend para o backend
+    const mapStatusToBackend = (status: string) => {
+      switch (status) {
+        case 'andamento': return 'ABERTA';
+        case 'aberto': return 'ABERTA';
+        case 'finalizado': return 'ENCERRADA';
+        case 'cancelado': return 'ENCERRADA';
+        default: return 'PENDENTE';
+      }
+    };
+
+    // Mapear categoria do frontend para o backend
+    const mapCategoriaToBackend = (categoria: string) => {
+      const map: Record<string, string> = {
+        'incendio_urbano': 'Incêndio Urbano',
+        'incendio_florestal': 'Incêndio Florestal',
+        'acidente_transito': 'Acidente de Trânsito',
+        'aph': 'Atendimento Pré-Hospitalar',
+        'resgate_veicular': 'Resgate Veicular',
+        'resgate_altura': 'Resgate em Altura',
+        'salvamento_aquatico': 'Salvamento Aquático',
+        'produtos_perigosos': 'Produtos Perigosos',
+        'desabamento': 'Desabamento',
+        'acao_preventiva': 'Ação Preventiva'
+      };
+      return map[categoria] || categoria;
+    };
+
     const { control, handleSubmit } = useForm<FormProps>({
         defaultValues: formData
     });
+
+    async function finalizarOcorrencia(data: FormProps) {
+      setLoading(true);
+      try {
+        // 1. Preparar dados para o backend
+        const ocorrenciaData = {
+          tipo: mapCategoriaToBackend(data.categoria || ''),
+          dataHora: new Date().toISOString(), // Ou combinar data + hora do form
+          viatura: data.viatura,
+          equipe: data.equipe,
+          descricao: data.descricao,
+          clientGeneratedId: `local-${Date.now()}`, // ID temporário para offline
+        };
+
+        // 2. Criar ocorrência no backend
+        const ocorrencia = await criarOcorrencia(ocorrenciaData);
+        
+        // 3. Adicionar geolocalização se disponível
+        if (data.latitude && data.longitude) {
+          await adicionarGeo(
+            ocorrencia.id,
+            parseFloat(data.latitude),
+            parseFloat(data.longitude)
+          );
+        }
+
+        // 4. Limpar dados do formulário
+        updateFormData({});
+
+        Alert.alert(
+          "Sucesso!",
+          "Ocorrência registrada com sucesso.",
+          [
+            {
+              text: "OK",
+              onPress: () => navigation.navigate("Home")
+            }
+          ]
+        );
+
+      } catch (error: any) {
+        Alert.alert(
+          "Erro",
+          error.message || "Não foi possível registrar a ocorrência. Tente novamente."
+        );
+      } finally {
+        setLoading(false);
+      }
+    }
 
     function salvarAlteracoes(data: FormProps) {
         updateFormData(data);
@@ -27,7 +105,7 @@ export function Passo4() {
 
     return (
         <View style={styles.container}>
-            <Header title="Minhas ocorrências" />  
+            <Header title="Confirmação" />  
 
             <ScrollView contentContainerStyle={styles.scroll}>
                 <Text style={styles.title}>Confirmação de dados</Text>
@@ -55,26 +133,25 @@ export function Passo4() {
                                 { label: "Resgate veicular", value: "resgate_veicular" },
                                 { label: "Resgate em altura", value: "resgate_altura" },
                                 { label: "Salvamento aquático", value: "salvamento_aquatico" },
-                                { label: "Produtos perigosos", value: "produtos_peligrosos" },
+                                { label: "Produtos perigosos", value: "produtos_perigosos" },
                                 { label: "Desabamento", value: "desabamento" },
                                 { label: "Ação preventiva", value: "acao_preventiva" },
                             ]}
                         />
 
                         <Dropdown
-                        label="Status"
-                        formProps={{
+                          label="Status"
+                          formProps={{
                             control,
                             name: "status",
-                        }}
-                        options={[
-                            { label: "selecione o status", value: "" },
+                          }}
+                          options={[
                             { label: "Em andamento", value: "andamento" },
                             { label: "Aberto", value: "aberto" },
                             { label: "Finalizado", value: "finalizado" },
                             { label: "Cancelado", value: "cancelado" },
-                        ]}
-                    />
+                          ]}
+                        />
 
                         <Input
                             label="Data"
@@ -169,11 +246,18 @@ export function Passo4() {
                     </View>
                 </View>
                 
-
-                {/* dps adicionar "onPress={finalizar}"" */}
                 <View style={styles.buttons}>
-                    <Voltar title="Voltar" onPress={() => navigation.goBack()} />
-                    <Enviar title="Finalizar" />
+                    <Voltar 
+                      title="Voltar" 
+                      onPress={() => navigation.goBack()} 
+                      disabled={loading}
+                    />
+                    <Enviar 
+                      title={loading ? "Enviando..." : "Finalizar"}
+                      onPress={handleSubmit(finalizarOcorrencia)}
+                      disabled={loading}
+                    />
+                    {loading && <ActivityIndicator style={{ marginTop: 10 }} />}
                 </View>
             </ScrollView>
         </View>

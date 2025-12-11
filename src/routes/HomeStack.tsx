@@ -11,30 +11,23 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 // Este Stack agrupa todas as telas que o usuário acessa após o login.
 const HomeStack: React.FC = () => (
-    <Stack.Navigator initialRouteName="Home">
+    <Stack.Navigator initialRouteName="Home" screenOptions={{ headerShown: false }}>
         
         {/* A tela Home tem seu próprio layout de cards, então ocultamos o cabeçalho Stack. */}
-        <Stack.Screen 
+        <Stack.Screen
         name="Home" 
         component={HomeScreen}
-        options={{ 
-            headerShown: false,
-            title: "Dashboard", // Título para o menu Drawer
-        }}
         />
 
         <Stack.Screen
             name="Formulario"
             component={FormularioRoutes}
-            options={{ headerShown: false }}
         />
 
         <Stack.Screen
             name="Ocorrencias"
             component={Ocorrencias}
-            options={{ title: "Minhas Ocorrências" }}
         />
-        
     </Stack.Navigator>
 );
 

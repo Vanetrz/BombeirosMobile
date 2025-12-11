@@ -7,6 +7,7 @@ export const styles = StyleSheet.create({
         backgroundColor: "#f0f4f7",
         paddingTop: 100,
     },
+
     header: {
         fontSize: 24,
         fontWeight: "bold",
@@ -14,7 +15,13 @@ export const styles = StyleSheet.create({
         textAlign: "center",
         color: "#333",
     },
-    instruction: { textAlign: "center", marginBottom: 40, color: "#666" },
+
+    instruction: {
+        textAlign: "center",
+        marginBottom: 40,
+        color: "#666",
+    },
+
     input: {
         height: 50,
         borderColor: "#ccc",
@@ -24,6 +31,7 @@ export const styles = StyleSheet.create({
         paddingHorizontal: 15,
         backgroundColor: "#fff",
     },
+
     button: {
         backgroundColor: "#2B65EC",
         padding: 15,
@@ -31,5 +39,6 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 10,
     },
+
     buttonText: { color: "#fff", fontWeight: "bold", fontSize: 18 },
 });

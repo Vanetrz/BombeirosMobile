@@ -1,22 +1,36 @@
 import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
-    container: {
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#007bff",
-
-        width: "100%",
-        height: 120,
-    },
-    title: {
+    backButton: {
+        position: "absolute",
+        left: 0,
+        padding: 21,
         marginTop: 30,
-        color: "#fff",
-        fontWeight: "700",
+    },
+
+    textContainer: {
+        flex: 1,
+        alignItems: "center",
+        marginTop: 30,
+    },
+
+    container: {
+        height: 120,
+        backgroundColor: "#2B65EC",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+        color: "#FFFFFF",
+    },
+
+    title: {
         fontSize: 24,
+        fontWeight: "700",
+        color: "#FFFFFF",
     },
+
     subtitle: {
-        color: "#fff",
-        opacity: 0.85,
-    },
+        fontSize: 14,
+        color: "#FFFFFF",
+    }
 });

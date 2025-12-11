@@ -26,6 +26,7 @@ const AppNavigator: React.FC = () => {
             name="ForgotPassword" 
             component={ForgotPasswordScreen} 
             options={{ title: 'Esqueci Minha Senha' }}
+            
             />
             
             {/* A ROTA HOME APONTA DIRETAMENTE PARA O HOMESTACK */}
@@ -34,7 +35,6 @@ const AppNavigator: React.FC = () => {
             component={HomeStack} 
             options={{ headerShown: false }} 
             />
-            
         </Stack.Navigator>
         </NavigationContainer>
     );
