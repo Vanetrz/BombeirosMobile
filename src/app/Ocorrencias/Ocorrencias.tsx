@@ -1,9 +1,10 @@
-import React from "react";
+import { Picker } from "@react-native-picker/picker";
+import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
-import Button from "../../components/Button/Nsei";
 import OccurrenceCard, { OccurrenceItem } from "../../components/CardOcorrencia";
 import Header from "../../components/Header";
-
+import { style } from "./styles";
+ 
 const MOCK: OccurrenceItem[] = [
     {
     id: "1",
@@ -22,17 +23,38 @@ const MOCK: OccurrenceItem[] = [
 ];
 
 export default function OccurrencesScreen({ navigation }: any) {
+    const [statusFilter, setStatusFilter] = useState<string>("todas");
+
+    const filteredData =
+    statusFilter === "todas"
+        ? MOCK
+        : MOCK.filter((oc) => oc.status === statusFilter);
+
+
     return (
         <View style={{ flex: 1 }}>
         <Header title="Minhas ocorrências" />
 
-            <View style={{ padding: 16 }}>
-                <Button
+            <View style={{ padding: 16, gap: 12, flex: 1 }}>
+                {/* <Button
                 title="Filtrar por mapa"
                 variant="ghost"
                 onPress={() => navigation.navigate("FilterMap")}
                 style={{ marginBottom: 12 }}
-                />
+                /> */}
+
+                <View style={style.filtro}>
+                <Picker
+                    selectedValue={statusFilter}
+                    onValueChange={(value) => setStatusFilter(value)}
+                >
+                    <Picker.Item label="Todas" value="todas" />
+                    <Picker.Item label="Abertas" value="aberta" />
+                    <Picker.Item label="Em andamento" value="andamento" />
+                    <Picker.Item label="Finalizadas" value="finalizada" />
+                    <Picker.Item label="Canceladas" value="finalizada" />
+                </Picker>
+                </View>
 
                 <ScrollView>
                 {MOCK.map((item) => (
