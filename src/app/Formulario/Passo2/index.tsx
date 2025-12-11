@@ -13,6 +13,7 @@ import { useNavigation } from "@react-navigation/native";
 // import type { RootParamList } from "../../../routes/formulario.routes";
 
 import { Enviar } from "../../../components/Button/Enviar";
+import { Voltar } from "../../../components/Button/Voltar";
 import Header from "../../../components/Header";
 import { Input } from "../../../components/Input";
 
@@ -21,6 +22,7 @@ export function Passo2() {
     const { control, handleSubmit, setValue, watch } = useForm<FormProps>();
     const [erroEndereco, setErroEndereco] = useState("");
     const [erroCoords, setErroCoords] = useState("");
+    const [step, setStep] = useState(1);
 
     const { updateFormData } = useFormOcorrencias()
     const navigation = useNavigation();
@@ -134,8 +136,11 @@ export function Passo2() {
 
                     {erroCoords ? <Text style={styles.erro}>{erroCoords}</Text> : null}
                 </View>
-
-                <Enviar title="Próximo" onPress={handleSubmit(handleNextStep)} />
+                
+                <View style={styles.buttons}>
+                    <Voltar title="Voltar" onPress={() => navigation.goBack()} />
+                    <Enviar title="Próximo" onPress={handleSubmit(handleNextStep)} />
+                </View>
             </ScrollView>
         </View>
     );

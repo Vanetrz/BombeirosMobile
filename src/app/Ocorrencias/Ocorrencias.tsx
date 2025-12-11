@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { ScrollView, View } from "react-native";
 import OccurrenceCard, { OccurrenceItem } from "../../components/CardOcorrencia";
 import Header from "../../components/Header";
-import { style } from "./styles";
- 
+import { styles } from "./styles";
+
 const MOCK: OccurrenceItem[] = [
     {
     id: "1",
@@ -43,7 +43,7 @@ export default function OccurrencesScreen({ navigation }: any) {
                 style={{ marginBottom: 12 }}
                 /> */}
 
-                <View style={style.filtro}>
+                <View style={styles.filtro}>
                 <Picker
                     selectedValue={statusFilter}
                     onValueChange={(value) => setStatusFilter(value)}

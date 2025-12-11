@@ -1,3 +1,4 @@
+import { useNavigation } from "expo-router";
 import { useForm } from "react-hook-form";
 import { Image, ScrollView, Text, View } from "react-native";
 import { useFormOcorrencias } from "../../../hooks/useFormOcorrencias";
@@ -5,12 +6,14 @@ import { FormProps } from "../../context/ContextoFormulario";
 import { styles } from "./styles";
 
 import { Enviar } from "../../../components/Button/Enviar";
+import { Voltar } from "../../../components/Button/Voltar";
 import { Dropdown } from "../../../components/Dropdown";
 import Header from "../../../components/Header";
 import { Input } from "../../../components/Input";
 
 export function Passo4() {
-const { formData, updateFormData } = useFormOcorrencias();
+    const navigation = useNavigation();
+    const { formData, updateFormData } = useFormOcorrencias();
 
     // Preenche o formulário com os dados já existentes
     const { control, handleSubmit } = useForm<FormProps>({
@@ -168,7 +171,10 @@ const { formData, updateFormData } = useFormOcorrencias();
                 
 
                 {/* dps adicionar "onPress={finalizar}"" */}
-                <Enviar title="Finalizar"/>
+                <View style={styles.buttons}>
+                    <Voltar title="Voltar" onPress={() => navigation.goBack()} />
+                    <Enviar title="Finalizar" />
+                </View>
             </ScrollView>
         </View>
     );

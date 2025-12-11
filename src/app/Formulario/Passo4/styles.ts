@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
 
     formGeral: {
         width: "100%",
-        gap: 26,
+        gap: 20,
     },
 
     form: {
@@ -41,6 +41,14 @@ export const styles = StyleSheet.create({
         width: 350,
         padding: 22,
         gap: 12,
+    },
+
+    buttons: {
+        width: "100%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignContent: "space-between", 
+        marginBottom: 300,
     },
 
     sectionTitle: {

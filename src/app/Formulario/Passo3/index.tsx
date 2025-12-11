@@ -7,6 +7,7 @@ import { useFormOcorrencias } from "../../../hooks/useFormOcorrencias"
 import { FormProps } from "../../context/ContextoFormulario"
 
 import { Enviar } from "../../../components/Button/Enviar"
+import { Voltar } from "../../../components/Button/Voltar"
 import Header from "../../../components/Header"
 import { Input } from "../../../components/Input"
 import MediaPicker from "../../../components/MediaPicker"
@@ -50,7 +51,10 @@ export function Passo3() {
                     />
                 </View>
                 
-                <Enviar title="Próximo" onPress={handleSubmit(handleNextStep)} />
+                <View style={styles.buttons}>
+                    <Voltar title="Voltar" onPress={() => navigation.goBack()} />
+                    <Enviar title="Próximo" onPress={handleSubmit(handleNextStep)} />
+                </View>
             </ScrollView>
 
         </View>

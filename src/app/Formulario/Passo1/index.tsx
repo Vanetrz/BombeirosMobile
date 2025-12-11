@@ -9,6 +9,7 @@ import { useNavigation } from "@react-navigation/native"
 // import type { RootParamList } from "../../../routes/formulario.routes";
 
 import { Enviar } from "../../../components/Button/Enviar"
+import { Voltar } from "../../../components/Button/Voltar"
 import { Dropdown } from "../../../components/Dropdown"
 import Header from "../../../components/Header"
 import { Input } from "../../../components/Input"
@@ -167,7 +168,10 @@ export function Passo1() {
                     />
                 </View>
 
-                <Enviar title="Próximo" onPress={handleSubmit(handleNextStep)} />
+                <View style={styles.buttons}>
+                    <Voltar title="Cancelar" onPress={() => navigation.goBack()} />
+                    <Enviar title="Próximo" onPress={handleSubmit(handleNextStep)} />
+                </View>
             </ScrollView>
         </View>
     );

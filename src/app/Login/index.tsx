@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet, Alert } from 'react-native';
-import { LoginScreenProps, UserProfile } from '../../@types/navigation'; 
+import { Alert, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { LoginScreenProps, UserProfile } from '../../@types/navigation';
 
 import { styles } from './styles';
 

@@ -46,5 +46,12 @@ export const styles = StyleSheet.create({
 
     inputPequeno: {
         flex: 1,
-    }
+    },
+    
+    buttons: {
+        width: "100%",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginBottom: 300,
+    },
 })
